@@ -33,8 +33,9 @@ router.get('/', async (req,res,next)=>{
 router.get('/:productId',async (req,res, next)=>{
     try{
     const id = req.params.productId;
-    const requestedProduct = await Product.findById(id).exec();
-    if (requestedProduct != null) {
+
+    const requestedProduct = await Product.find({Product_Id: id}).exec();
+    if (requestedProduct[0] != null) {
         res.status(200).json({message: "Product fetched successfully",requestedProduct});
     } else {
         res.status(404).json({message: "Product not found"});
@@ -72,6 +73,20 @@ router.post('/',upload.single('Picture'), async (req,res, next)=>{
         res.json({message: err.message});
     }
     
-})
+});
+
+router.delete('/:productId', async (req, res, next) => {
+    try {
+        const id = req.params.productId;
+        const deletedProduct =  await Product.remove({Product_Id: id});
+        if (deletedProduct != null) {
+            res.status(200).json({message: "Product deleted successfully",deletedProduct});
+        } else {
+            res.status(404).json({message: "Product not found",deletedProduct});
+        }
+    } catch (err) {
+        res.json({message: err.message});
+    }
+});
 
 module.exports = router;
