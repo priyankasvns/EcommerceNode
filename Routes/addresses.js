@@ -46,9 +46,14 @@ router.post('/', async(req, res, next) => {
 
     if (userCounts.length < 2 || userCounts == null) {
 
+        //Fetching the latest Address_Id
+        const latestAddress = await Address.find().sort({ 'Address_Id': -1 }).limit(1);
+        //Appending the Address_Id to create a new Address_Id
+        const newAddressId = latestAddress[0].Address_Id + 1;
+
         const address = new Address({
             _id: new Mongoose.Types.ObjectId(),
-            Address_Id: req.body.Address_Id,
+            Address_Id: newAddressId,
             User_Id: req.body.User_Id,
             Last_Name: req.body.Last_Name,
             First_Name: req.body.First_Name,
