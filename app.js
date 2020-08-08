@@ -7,11 +7,12 @@ require('dotenv/config');
 
 //import routes
 const productsRoute = require('./Routes/products');
-
+const usersRoute = require('./Routes/users');
 //Middlewares
 app.use(cors())
 app.use(bodyParser.json());
 app.use('/api/products', productsRoute);
+app.use('/api/users', usersRoute);
 
 
 //Connect To DB
