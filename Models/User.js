@@ -37,6 +37,10 @@ const UserSchema = mongoose.Schema({
         type: Date,
         required: false
     },
+    Role:{
+        type: String,
+        required: true
+    },
     Activated: {
         type: Boolean,
         required: true

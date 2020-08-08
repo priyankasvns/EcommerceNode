@@ -10,7 +10,7 @@ const { json } = require('body-parser');
 router.post('/login', async (req, res, next) => { 
      // Find user with requested email 
      let user = new User();
-     const checkUser = await User.findOne({email: req.body.email});
+     const checkUser = await User.findOne({Email: req.body.email});
      if (checkUser != null) {
         if (checkUser.validPassword(req.body.password)) { 
             res.status(201).json({ 
@@ -45,9 +45,10 @@ router.post('/signup', async (req, res, next) => {
        newUser.UserId = req.body.UserId,
        newUser.DateOfBirth = req.body.DateOfBirth,
        newUser.Phone = req.body.Phone,
-       newUser.DateJoined = req.body.DateJoined,
-       newUser.UpdatedDate = req.body.UpdatedDate,
+       newUser.DateJoined = Date.now(),
+       newUser.UpdatedDate = Date.now(),
        newUser.Activated = req.body.Activated,
+       newUser.Role = req.body.Role,
      
          // Call setPassword function to hash password 
          newUser.setPassword(req.body.password); 
