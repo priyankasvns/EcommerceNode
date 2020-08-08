@@ -69,8 +69,7 @@ router.post('/',upload.single('Picture'), async (req,res, next)=>{
     if (validator.validate(req.body.email)) {       
         let user = new User();
         const checkUser = await User.findOne({Email: req.body.email});
-        if (checkUser != null) {
-            // res.json({message:checkUser});
+        if (checkUser != null) {         
         if (checkUser.validPassword(req.body.password) && checkUser.Role === "Admin") {    
             //Fetching the latest product id
             const latestProduct = await Product.find().sort({'Product_Id':-1}).limit(1);
@@ -123,8 +122,7 @@ router.delete('/:productId', async (req, res, next) => {
         if (validator.validate(req.body.email)) {       
         let user = new User();
         const checkUser = await User.findOne({Email: req.body.email});
-        if (checkUser != null) {
-            // res.json({message:checkUser});
+        if (checkUser != null) {           
         if (checkUser.validPassword(req.body.password) && checkUser.Role === "Admin") { 
         const id = req.params.productId;
         const tobeDeletedProduct = await Product.findOne({Product_Id: id});
