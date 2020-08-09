@@ -19,7 +19,7 @@ const CartSchema = mongoose.Schema({
     },
     Address_Id: {
         type: Number,
-        require:true
+        require:false
     },
     Quantity: 
     {

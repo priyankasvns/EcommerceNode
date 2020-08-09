@@ -65,15 +65,18 @@ router.post('/:userId', async (req,res, next)=>{
     }
 
     var lastCartId;
+    var lastId;
     var lastIdFetched;
 
     try{
         lastCartId = await Cart.find().sort({"Cart_Id" : -1}).limit(1).exec();
         if (lastCartId[0] != null){
             //console.log('last id true' + lastCartId[0].Cart_Id);
+            lastId = lastCartId[0].Cart_Id;
             lastIdFetched = true;
         }
         else{
+            lastId = 0;
             lastIdFetched = false;
         }
     }
@@ -100,14 +103,13 @@ router.post('/:userId', async (req,res, next)=>{
 
     if(prodExists == false)
     {
-        if(addrIdFetched == true && availQuantity == true && lastIdFetched == true)
+        if(addrIdFetched == true && availQuantity == true)
     {
         const addProdToCart = new Cart({
             _id: new Mongoose.Types.ObjectId(),
-             Cart_Id: lastCartId[0].Cart_Id + 1,
+             Cart_Id: lastId + 1,
              Product_Id: requestedProduct[0].Product_Id,
-             User_Id: req.params.userId,
-             Address_Id: addrId[0].Address_Id,
+             User_Id: req.params.userId,             
              Quantity: req.body.Quantity,
              Time_Added: Date.now()
          });
