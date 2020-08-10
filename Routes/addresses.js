@@ -21,8 +21,6 @@ router.get('/', async(req, res, next) => {
 //Fetch a specific id based on the id. It by default checks the indexes and as there is a default indexer, it matches the parameter for that indexer
 router.get('/user', async(req, res, next) => {
     try {
-        const userId = req.query.User_Id;
-
         const requestedAddress = await Address.find({ User_Id: req.query.User_Id }).exec();
 
         if (requestedAddress != null) {
@@ -105,7 +103,6 @@ router.put('/:AddressId', async(req, res, next) => {
 //Delete Address by Address_Id
 router.delete('/:addressId', async(req, res, next) => {
     try {
-        let userAddress = new Address();
         const checkUserAddress = await Address.findOne({ _id: req.params.addressId });
 
         if (checkUserAddress != null) {

@@ -12,6 +12,8 @@ const cartRoute = require('./Routes/cart');
 const ordersRoute = require('./Routes/orders');
 
 const addressesRoute = require('./Routes/addresses');
+const commentsRoute = require('./Routes/comments');
+
 const usersRoute = require('./Routes/users');
 
 //Middlewares
@@ -24,6 +26,8 @@ app.use('/api/cart', cartRoute);
 app.use('/api/orders', ordersRoute);
 
 app.use('/api/addresses', addressesRoute);
+app.use('/api/comments', commentsRoute);
+
 app.use('/api/users', usersRoute);
 
 //Connect To DB
