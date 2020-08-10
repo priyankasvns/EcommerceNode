@@ -10,7 +10,7 @@ const { json } = require('body-parser');
 router.post('/login', async (req, res, next) => { 
      // Find user with requested email 
      let user = new User();
-     const checkUser = await User.findOne({Email: req.body.email});
+     const checkUser = await User.findOne({Email: req.body.Email});
      if (checkUser != null) {
         if (checkUser.validPassword(req.body.password)) { 
             res.status(201).json({ 
@@ -30,6 +30,40 @@ router.post('/login', async (req, res, next) => {
      }
     });
 
+    // Change password
+    router.patch('/Changepassword',async(req, res, next) =>{
+        let user = new User();
+     const checkUser = await User.findOne({Email: req.body.Email});
+     if (checkUser != null) {
+        if (checkUser.validPassword(req.body.password)) { 
+            const query = {User_Id: checkUser.UserId}
+            // const update = {$set:setPassword(req.body.NewPassword)};
+            const updatePassword = await User.updateOne(query, checkUser.setPassword(req.body.NewPassword));
+            if (updatePassword != null) {
+                res.status(201).json({ 
+                    message : "User Password Updated" 
+                });
+            }
+            else{
+                res.status(201).json({ 
+                    message : "Not updated" 
+                });
+            }
+            
+        } 
+        else { 
+            res.status(400).json({ 
+                message : "Incorrect Password"
+            }); 
+     }
+    } 
+     else {
+        res.status(400).json({ 
+            message : "User not found."
+        });
+     }
+    })
+
       
    
 // User signup api 
@@ -48,7 +82,7 @@ router.post('/signup', async (req, res, next) => {
        newUser.DateJoined = Date.now(),
        newUser.UpdatedDate = Date.now(),
        newUser.Activated = req.body.Activated,
-       newUser.Role = req.body.Role,
+       newUser.Role = req.body.Role,            
      
          // Call setPassword function to hash password 
          newUser.setPassword(req.body.password); 
@@ -60,6 +94,7 @@ router.post('/signup', async (req, res, next) => {
        } else {
         res.json({message: "User could not be added successfully"});
        }
+       
    }); 
    
 module.exports = router;
