@@ -1,0 +1,2876 @@
+{
+	"info": {
+		"_postman_id": "1d7354b8-7fff-4d88-9c18-432d919841d4",
+		"name": "Project4-NodeCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "(Add Addresses) Add address to DB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a32f229-9923-47fc-8e34-6ae0fca26bc9",
+						"exec": [
+							"pm.test(\"Add Address Successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Address Added Successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \r\n        \"User_Id\": \"5f2eb5c3a58a6a31a89c7483\",\r\n        \"Last_Name\": \"Sai\",\r\n        \"First_Name\": \"Sree\",\r\n        \"Street_Address\": \"Main Rd\",\r\n        \"PostCode\": \"N2P1H31\",\r\n        \"City\": \"Toronto\",\r\n        \"Phone_Number\": \"226-500-6040\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/addresses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses"
+					]
+				},
+				"description": "Add user's address to DB\r\nNote: Userid = 2"
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Email is correct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "78cc254c-b43a-4125-9862-a799bcb3bc2a",
+						"exec": [
+							"pm.test(\"Email check\", function(){\r",
+							"    pm.expect(pm.response.json().savedUser.Email).to.equal(\"xs@ee.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \r\n    \"Email\": \"xs@ee.com\",\r\n    \"Name\": \"SaiSree\",\r\n    \"DateOfBirth\" : \"12/22/1994\",\r\n    \"Phone\" : \"91897677\",\r\n    \"DateJoined\" : \"12/21/2019\",\r\n    \"UpdatedDate\" : \"12/21/2019\",\r\n    \"Activated\" : 1,\r\n    \"password\" : \"shak9234\",\r\n    \"Role\" : \"User\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check User activation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b7fbb1c-be54-48d6-acb4-ccad921f9801",
+						"exec": [
+							"pm.test(\"Activation check\", function(){\r",
+							"    pm.expect(pm.response.json().savedUser.Activated).to.equal(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \r\n    \"Email\": \"xs@ee.com\",\r\n    \"Name\": \"SaiSree\",\r\n    \"DateOfBirth\" : \"12/22/1994\",\r\n    \"Phone\" : \"91897677\",\r\n    \"DateJoined\" : \"12/21/2019\",\r\n    \"UpdatedDate\" : \"12/21/2019\",\r\n    \"Activated\" : 1,\r\n    \"password\" : \"shak9234\",\r\n    \"Role\" : \"User\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validating while signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97bfdf74-aa90-48c3-8904-df90a0a394bd",
+						"exec": [
+							"\r",
+							"pm.test(\"No validation errors\", function(){\r",
+							"var JsonData = pm.response.json();\r",
+							"pm.expect(JsonData.hasOwnProperty(\"errors\")).to.be.false;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"Email\": \"xds@sree.com\",\r\n    \"Name\": \"Sai Sree\",\r\n    \"DateOfBirth\" : \"12/22/1994\",\r\n    \"Phone\" : \"91897677\",\r\n    \"DateJoined\" : \"12/21/2019\",\r\n    \"UpdatedDate\" : \"12/21/2019\",\r\n    \"Activated\" : 1,\r\n    \"password\" : \"shan234\",\r\n    \"Role\" : \"User\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check login details status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9a95ee7-642d-49ea-8a6d-79922aac34fe",
+						"exec": [
+							"pm.test(\"response is ok\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\" : \"sai@sree.com\",\r\n   \"password\" : \"sha234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check to have invalid username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d030e9c-2a0f-4c7d-b49c-0e394adbf5d3",
+						"exec": [
+							"pm.test(\"response is ok\", function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\" : \"saisree.com\",\r\n    \"password\" : \"sha234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validation check",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b3198344-ab41-44d7-ab7e-6dfe0a583896",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ddc9c931-5b77-4ca9-a9b9-78e063f19770",
+						"exec": [
+							"\r",
+							"pm.test(\"No validation errors\", function(){\r",
+							"var JsonData = pm.response.json();\r",
+							"\r",
+							"pm.expect(JsonData.hasOwnProperty(\"errors\")).to.be.false;\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\" : \"sai@sree.com\",\r\n    \"password\" : \"sha234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Error check while signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3214fbab-5362-42e8-9d2b-8f0550c7541c",
+						"exec": [
+							"pm.test(\"No errors\", function(){\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;   \r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \r\n    \"Email\": \"xs@ee.com\",\r\n    \"Name\": \"SaiSree\",\r\n    \"DateOfBirth\" : \"12/22/1994\",\r\n    \"Phone\" : \"91897677\",\r\n    \"DateJoined\" : \"12/21/2019\",\r\n    \"UpdatedDate\" : \"12/21/2019\",\r\n    \"Activated\" : 1,\r\n    \"password\" : \"shak9234\",\r\n    \"Role\" : \"User\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Role check test ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d6412ff-27ec-49b6-b84c-19dc21b98504",
+						"exec": [
+							"pm.test(\"Role check\", function(){\r",
+							"    pm.expect(pm.response.json().savedUser.Role).to.equal(\"User\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"Email\": \"xs@ee.com\",\r\n    \"Name\": \"SaiSree\",\r\n    \"DateOfBirth\" : \"12/22/1994\",\r\n    \"Phone\" : \"91897677\",\r\n    \"DateJoined\" : \"12/21/2019\",\r\n    \"UpdatedDate\" : \"12/21/2019\",\r\n    \"Activated\" : 1,\r\n    \"password\" : \"shak9234\",\r\n    \"Role\" : \"User\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check user name is correct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4acf6867-2241-48ae-82ee-cf3e5bd35a0f",
+						"exec": [
+							"pm.test(\"Email check\", function(){\r",
+							"    pm.expect(pm.response.json().savedUser.Name).to.equal(\"SaiSree\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"Email\": \"xs@ee.com\",\r\n    \"Name\": \"SaiSree\",\r\n    \"DateOfBirth\" : \"12/22/1994\",\r\n    \"Phone\" : \"91897677\",\r\n    \"DateJoined\" : \"12/21/2019\",\r\n    \"UpdatedDate\" : \"12/21/2019\",\r\n    \"Activated\" : 1,\r\n    \"password\" : \"shak9234\",\r\n    \"Role\" : \"User\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Phone number check test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "93a2a47f-8385-4ea3-b898-082e0630b1f4",
+						"exec": [
+							"pm.test(\"Phone number check successfull\", function(){\r",
+							"    pm.expect(pm.response.json().savedUser.Phone).to.equal(\"91897677\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \r\n    \"Email\": \"xs@ee.com\",\r\n    \"Name\": \"SaiSree\",\r\n    \"DateOfBirth\" : \"12/22/1994\",\r\n    \"Phone\" : \"91897677\",\r\n    \"DateJoined\" : \"12/21/2019\",\r\n    \"UpdatedDate\" : \"12/21/2019\",\r\n    \"Activated\" : 1,\r\n    \"password\" : \"shak9234\",\r\n    \"Role\" : \"User\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Add Addresses)Exceed user's maximum number of addresses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b8ff64b-4641-4b03-82c8-ed721d7b82a9",
+						"exec": [
+							"pm.test(\"Exceed the number of each user's addresses\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Each user only can add 2 addresses\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \r\n        \"Address_Id\": 10,\r\n        \"User_Id\": \"5f2829c47f73ced68108333c\",\r\n        \"Last_Name\": \"Chen\",\r\n        \"First_Name\": \"Hung-Chun\",\r\n        \"Street_Address\": \"Main Rd\",\r\n        \"PostCode\": \"N2P1H31\",\r\n        \"City\": \"Toronto\",\r\n        \"Phone_Number\": \"226-500-6040\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/addresses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses"
+					]
+				},
+				"description": "Add user's address to DB\r\nNote: Userid = 2"
+			},
+			"response": []
+		},
+		{
+			"name": "(Get Addresses)Get certian user's address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c5d9129e-a18b-450a-8501-3c32cf0d1165",
+						"exec": [
+							"pm.test(\"Get certain User's Address Successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\" Certain Usere's Addresses fetched successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/addresses/user?User_Id=5f2829797f73ced68108333b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses",
+						"user"
+					],
+					"query": [
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced68108333b"
+						}
+					]
+				},
+				"description": "Get user's (id=1) all address from DB"
+			},
+			"response": []
+		},
+		{
+			"name": "(List all addresses) Get all user's address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d673872-6961-4127-a4c3-1ac8cb5b926e",
+						"exec": [
+							"pm.test(\"Get All Address Successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"All Address fetched successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/addresses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses"
+					]
+				},
+				"description": "Get all user's address from DB"
+			},
+			"response": []
+		},
+		{
+			"name": "Address data didn't exist at DB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88718bdc-5374-4510-93b4-c2cf0481d2f6",
+						"exec": [
+							"pm.test(\"Address didn't exist\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"User's address doesn't exist\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/addresses/user?User_Id=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses",
+						"user"
+					],
+					"query": [
+						{
+							"key": "User_Id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "Get user's (id=100) all address from DB"
+			},
+			"response": []
+		},
+		{
+			"name": "(Update Address)Edit certain address detail from certain address ID number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "443f205c-b75c-4ee5-97bd-d93f1f4ba9ac",
+						"exec": [
+							"pm.test(\"Update Address Successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Update Successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"Address_Id\": 4,\r\n        \"User_Id\": \"5f2829797f73ced68108333b\",\r\n        \"Last_Name\": \"Updated\",\r\n        \"First_Name\": \"Hung-Chun_Updated\",\r\n        \"Street_Address\": \"10 Valley Rd3_Updated\",\r\n        \"PostCode\": \"N2P1H33_Updated\",\r\n        \"City\": \"Brandford3_Updated\",\r\n        \"Phone_Number\": \"226-500-6042_Updated\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/addresses/5f2836097f73ced681083360",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses",
+						"5f2836097f73ced681083360"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Update Address)Wrong format of params input occur user can't update address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ccb5d992-e07f-4710-86b8-cac61f40abef",
+						"exec": [
+							"pm.test(\"Invailed address detail modify\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Wrong format of input\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"lastName\": \"Tsai_3\",\r\n        \"firstName\": \"Hung-Chun_3\",\r\n        \"streetAddress\": \"10 Valley Rd3\",\r\n        \"postCode\": \"N2P1H33\",\r\n        \"city\": \"Brandford3\",\r\n        \"phoneNumber\": \"226-500-6042\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/addresses/xxxx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses",
+						"xxxx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Update Address)Cannot find the address Id from DB to edit address Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6836ed6-4eca-487d-867c-93d9e7c34612",
+						"exec": [
+							"pm.test(\"Invailed address detail modify\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Address ID doesn't exist\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"lastName\": \"Tsai_3\",\r\n        \"firstName\": \"Hung-Chun_3\",\r\n        \"streetAddress\": \"10 Valley Rd3\",\r\n        \"postCode\": \"N2P1H33\",\r\n        \"city\": \"Brandford3\",\r\n        \"phoneNumber\": \"226-500-6042\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/addresses/5f2836097f73ced681083369",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses",
+						"5f2836097f73ced681083369"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Delete Address)Delete the address by addressID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c86a9714-8f15-4f5f-a969-8dfa26ed218b",
+						"exec": [
+							"pm.test(\"Delete Address successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Delete successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/addresses/5f2ef1598638e96bec5a992a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses",
+						"5f2ef1598638e96bec5a992a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Delete Address)Cannot find the address to delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d2891d4-a691-4a9e-bcbd-ab7e28a3a329",
+						"exec": [
+							"pm.test(\"Cannot delete Address\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Can't found the Address Id to delete\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/addresses/5f2ef1598638e96bec5a992a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addresses",
+						"5f2ef1598638e96bec5a992a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Get Comment)Found Comments for certain product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "188f8c52-10cc-46bf-9e38-a3fd56ec9daf",
+						"exec": [
+							"pm.test(\"Found Comments\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Certain Product's Comments fetched successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/getComment?Product_Id=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"getComment"
+					],
+					"query": [
+						{
+							"key": "Product_Id",
+							"value": "3"
+						}
+					]
+				},
+				"description": "Get the comments from product #3"
+			},
+			"response": []
+		},
+		{
+			"name": "(Get Comment) Can't fetch the comment by wrong Product Id format and Input",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abdc27c3-4476-45b0-9976-527480718227",
+						"exec": [
+							"pm.test(\"Invailed Input for Finding Comments \", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Enter the wrong Product ID\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/getComment?Product_Id=xxxxxx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"getComment"
+					],
+					"query": [
+						{
+							"key": "Product_Id",
+							"value": "xxxxxx"
+						}
+					]
+				},
+				"description": "Get the comments from product #3"
+			},
+			"response": []
+		},
+		{
+			"name": "(Get Comment) Product don't have any comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "53543da5-77a7-451b-b397-402477787c30",
+						"exec": [
+							"pm.test(\"Product don't have any comment\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Did not found the comment in this product\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/getComment?Product_Id=33",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"getComment"
+					],
+					"query": [
+						{
+							"key": "Product_Id",
+							"value": "33"
+						}
+					]
+				},
+				"description": "Get the comments from product #3"
+			},
+			"response": []
+		},
+		{
+			"name": "(Update Comment) User's Id doesn't match to the comment Id - Can't update the comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "25406f0f-f4a5-4022-96e9-138c8915e945",
+						"exec": [
+							"pm.test(\"Can't update the comment due to User Id doesn't match\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"User's comment doesn't exist/Comment & User_Id are not match.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_id",
+							"value": "5f2835707f73ced681083355",
+							"type": "text"
+						},
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced681083xxx",
+							"type": "text"
+						},
+						{
+							"key": "Product_Id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "Content",
+							"value": "Update Comment Test",
+							"type": "text"
+						},
+						{
+							"key": "Comment_Image",
+							"type": "file",
+							"src": "/C:/Users/Tsai/Desktop/UnderSea/Underwater-21.jpg"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/updateComment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"updateComment"
+					],
+					"query": [
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced68108333b",
+							"disabled": true
+						},
+						{
+							"key": "_id",
+							"value": "5f2835707f73ced681083355",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Update Comment) Successfully update the comment Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "858303e5-00a3-4741-8a8e-5637c656696f",
+						"exec": [
+							"pm.test(\"Update the comment successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Update Successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_id",
+							"value": "5f2835707f73ced681083355",
+							"type": "text"
+						},
+						{
+							"key": "User_Id",
+							"value": "5f2e173489b92f7b0c19bf52",
+							"type": "text"
+						},
+						{
+							"key": "Product_Id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "Content",
+							"value": "Update Comment Test",
+							"type": "text"
+						},
+						{
+							"key": "Comment_Image",
+							"type": "file",
+							"src": "/C:/Users/Tsai/Desktop/UnderSea/Underwater-21.jpg"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/updateComment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"updateComment"
+					],
+					"query": [
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced68108333b",
+							"disabled": true
+						},
+						{
+							"key": "_id",
+							"value": "5f2835707f73ced681083355",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Update Comment) Invailed input for updating the comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e14db6f1-01b6-46d2-be89-18a11431b354",
+						"exec": [
+							"pm.test(\"Invailed Input for updating the Comment\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Wrong format of input\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_id",
+							"value": "5f2835707f73ced68108xxxx",
+							"type": "text"
+						},
+						{
+							"key": "User_Id",
+							"value": "5f2e173489b92f7b0c19xxxx",
+							"type": "text"
+						},
+						{
+							"key": "Product_Id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "Content",
+							"value": "Update Comment Test",
+							"type": "text"
+						},
+						{
+							"key": "Comment_Image",
+							"type": "file",
+							"src": "/C:/Users/Tsai/Desktop/UnderSea/Underwater-21.jpg"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/updateComment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"updateComment"
+					],
+					"query": [
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced68108333b",
+							"disabled": true
+						},
+						{
+							"key": "_id",
+							"value": "5f2835707f73ced681083355",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Delete Comment) Successfully Delete Comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ca92905-fdd0-4664-ab59-50a4f58f716a",
+						"exec": [
+							"pm.test(\"Delete comment successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Delete comment successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\" : \"5f30369bbe3c766b4cb18a29\",\r\n    \"User_Id\": \"5f2829797f73ced68108333b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/deleteComment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"deleteComment"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "5f302b5b318356648cfa0de2",
+							"disabled": true
+						},
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced68108333b",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Delete Comment) Invailed User Id/Input for deleting comment/User and comment doesn't match",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88fd5ffa-a366-41d3-af07-1be91a531f3b",
+						"exec": [
+							"pm.test(\"Invaided for deleting comment.\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"User's comment doesn't exist/Comment & User_Id are not match.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\" : \"5f30369bbe3c766b4cb18a29\",\r\n    \"User_Id\": \"5f2829797f73ced68108333b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/deleteComment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"deleteComment"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "5f2fffcc22646259b8d75fb5",
+							"disabled": true
+						},
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced68108333b",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Add Comment) User didn't purchasing the product. Can't adding the comment.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "44b3233d-600e-4cf4-8d3b-561830e1c337",
+						"exec": [
+							"pm.test(\"Can't post the comment - User didn't purchasing the product\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"User didn't purchasing this product.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Product_Id\" : 4,\r\n    \"User_Id\": \"5f2829797f73ced68108333b\",\r\n    \"Content\": \"Adding new comment Test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/createComment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"createComment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Add Comment) Successfully adding comment.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef58bc50-3315-43c4-a81a-7cfd1c1fa901",
+						"exec": [
+							"pm.test(\"Can't post the comment - User didn't purchasing the product\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Comment Added Successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Product_Id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced68108333b",
+							"type": "text"
+						},
+						{
+							"key": "Content",
+							"value": "Adding new comment Test",
+							"type": "text"
+						},
+						{
+							"key": "Comment_Image",
+							"type": "file",
+							"src": "/C:/Users/Tsai/Desktop/UnderSea/Underwater-21.jpg"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/createComment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"createComment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Add Comment) User already have comment on that item - Can't add comment.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "93278eed-3d67-4636-b2ff-fc8fc380c47b",
+						"exec": [
+							"pm.test(\"Can't post the comment - User didn't purchasing the product\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"User already have comment at this product.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Product_Id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "User_Id",
+							"value": "5f2829797f73ced68108333b",
+							"type": "text"
+						},
+						{
+							"key": "Content",
+							"value": "Adding new comment test",
+							"type": "text"
+						},
+						{
+							"key": "Comment_Image",
+							"type": "file",
+							"src": "/C:/Users/Tsai/Desktop/UnderSea/Underwater-21.jpg"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/comments/createComment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"comments",
+						"createComment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Products to cart Success scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eab53311-c3f2-4247-bdd2-6596ec032a35",
+						"exec": [
+							"pm.test(\"Product Added to Cart Successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Product Added to Cart Successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Product_Id\":\"3\",\r\n\"Quantity\":\"3\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/cart/5f2829797f73ced68108333b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cart",
+						"5f2829797f73ced68108333b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Success message - Update Quantity for Products which already exists in cart scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc739de8-c9ef-4969-ab67-26acfb451ae0",
+						"exec": [
+							"pm.test(\"Product already exists in cart, Quantity updated!\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Product already exists in cart, Quantity updated!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Product_Id\":\"2\",\r\n\"Quantity\":\"3\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/cart/5f2829797f73ced68108333b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cart",
+						"5f2829797f73ced68108333b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all the products in the cart for a user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c509060d-7964-4e18-b148-a6f70a7d1de9",
+						"exec": [
+							"pm.test(\"Products in your Cart are fetched\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Products in your Cart are fetched\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/cart/5f2829797f73ced68108333b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cart",
+						"5f2829797f73ced68108333b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No products in the cart scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c481211c-dcb8-479a-ba50-0ccb610c211b",
+						"exec": [
+							"pm.test(\"No Products are found in your cart\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"No Products are found in your cart\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/cart/5f2829c47f73ced68108333c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cart",
+						"5f2829c47f73ced68108333c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a product from the cart- success scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "327260d0-8447-406e-9a15-e780daebd9c5",
+						"exec": [
+							"pm.test(\"Product deleted from cart successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Product deleted from cart successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Product_Id\":\"3\",\r\n\"Quantity\":\"1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/cart/5f2829797f73ced68108333b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cart",
+						"5f2829797f73ced68108333b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All the orders of a user are fetched successfully",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ac672a4-0114-478c-ae14-76b5ab01baf9",
+						"exec": [
+							"pm.test(\"Orders fetched successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Orders fetched successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/orders/5f2829797f73ced68108333b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"5f2829797f73ced68108333b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User doesnt have any items added to the cart to place an order scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8a4e4eb-5771-47c6-8809-749a39372c00",
+						"exec": [
+							"pm.test(\"OOps!! You do not have any product added in your Cart\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"OOps!! You do not have any product added in your Cart\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orders/5f2829797f73ced68108333e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"5f2829797f73ced68108333e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insufficient products available in the database scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "44b331e5-bf7e-420f-9031-437b255f0725",
+						"exec": [
+							"pm.test(\"OOps! We do not have sufficient products available in our database to place an order. Please try again tomorrow.\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"OOps! We do not have sufficient products available in our database to place an order. Please try again tomorrow.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/orders/5f2829797f73ced68108333b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"5f2829797f73ced68108333b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Placed Successfully success scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd3d0cca-0519-4843-b1f4-3e640d5c0111",
+						"exec": [
+							"pm.test(\"Order placed Successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Order placed Successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/orders/5f2829797f73ced68108333c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"5f2829797f73ced68108333c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Unavailable Scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e8a8da3-b90a-4fad-8176-a5ea14d14d9a",
+						"exec": [
+							"pm.test(\"Product Unavailable\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Product Unavailable\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/orders/5f2829797f73ced68108333c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"5f2829797f73ced68108333c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fed46342-4619-4d1d-97ef-c3353bb01454",
+						"exec": [
+							"pm.test(\"Create Product Successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Product Added Successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Size",
+							"value": "Large",
+							"type": "text"
+						},
+						{
+							"key": "Color",
+							"value": "Black",
+							"type": "text"
+						},
+						{
+							"key": "Name",
+							"value": "Trolley",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "This is a pretty sturdy trolley",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "32.58",
+							"type": "text"
+						},
+						{
+							"key": "Available_Quantity",
+							"value": "75",
+							"type": "text"
+						},
+						{
+							"key": "Picture",
+							"type": "file",
+							"src": "/C:/Users/sande/Downloads/virus.png"
+						},
+						{
+							"key": "email",
+							"value": "admin@shopo.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product Unsuccessful - Invalid Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fec19052-bf95-4226-af61-4f68abf5c650",
+						"exec": [
+							"pm.test(\"Create Product Unsuccessful - Invalid Password\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Either the password is incorrect or the user is not an admin to add a new Product\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Size",
+							"value": "Small",
+							"type": "text"
+						},
+						{
+							"key": "Color",
+							"value": "Green",
+							"type": "text"
+						},
+						{
+							"key": "Name",
+							"value": "\"Levis Shirt\"",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "\"The is a levis shirt\"",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "56.7",
+							"type": "text"
+						},
+						{
+							"key": "Available_Quantity",
+							"value": "57",
+							"type": "text"
+						},
+						{
+							"key": "Picture",
+							"type": "file",
+							"src": "/C:/Users/sande/Downloads/Settings-Person.png"
+						},
+						{
+							"key": "email",
+							"value": "admin@shopo.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "ad",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product Unsuccessful - Non Existing User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b07e171-8764-4136-ba75-c9877c902f31",
+						"exec": [
+							"pm.test(\"Create Product Unsuccessful - Non Existing User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"The user either does not exist in the database or is not an admin\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Size",
+							"value": "Small",
+							"type": "text"
+						},
+						{
+							"key": "Color",
+							"value": "Green",
+							"type": "text"
+						},
+						{
+							"key": "Name",
+							"value": "\"Levis Shirt\"",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "\"The is a levis shirt\"",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "56.7",
+							"type": "text"
+						},
+						{
+							"key": "Available_Quantity",
+							"value": "57",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "adm@shopo.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "Picture",
+							"type": "file",
+							"src": "/C:/Users/sande/Downloads/images.jpg"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0f83d188-faf7-4c93-bfba-9dfaf6f6add7",
+						"exec": [
+							"pm.test(\"Create Product Unsuccessful - Invalid Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"This is not a valid email address. Please enter a valid email\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Size",
+							"value": "Small",
+							"type": "text"
+						},
+						{
+							"key": "Color",
+							"value": "Green",
+							"type": "text"
+						},
+						{
+							"key": "Name",
+							"value": "\"Levis Shirt\"",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "\"The is a levis shirt\"",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "56.7",
+							"type": "text"
+						},
+						{
+							"key": "Available_Quantity",
+							"value": "57",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "adminshopo.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "Picture",
+							"type": "file",
+							"src": "/C:/Users/sande/Downloads/kiosk.png"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch single product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d7801fb-3ff2-4d0d-bf0a-2b23d83dd993",
+						"exec": [
+							"pm.test(\"Fetch Single Product - Successful\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Product fetched successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch All products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cb49c7c-7ed6-492c-b3ee-bbd1de1602df",
+						"exec": [
+							"pm.test(\"Fetch all products - successful\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Products fetched successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fbf9da08-464b-4692-b520-af3242403c04",
+						"exec": [
+							"pm.test(\"Product Deleted Successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Product deleted successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@shopo.com\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4d9d71b9-7d73-48e6-93ad-617ef636674c",
+						"exec": [
+							"pm.test(\"Product Not Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Product not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/5000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"5000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8cad90cc-2014-40e3-900a-c4ad8010bbaf",
+						"exec": [
+							"pm.test(\"Products not found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Products not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Deletion unsuccessful : Invalid user/ password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3efc93f6-315f-4a80-b493-cde1f3323154",
+						"exec": [
+							"pm.test(\"Product Deletion unsuccessful : Invalid user/ password\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Either the password is incorrect or the user is not an admin to delete a new Product\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@shopo.com\",\r\n    \"password\":\"admi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product not found to delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "59152ca9-f893-41ec-aeed-9eeefbf9bcc5",
+						"exec": [
+							"pm.test(\"Product not found to delete\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@shopo.com\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/400",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"400"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Deletion unsuccessful : Admin not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3093a863-2cd7-4cf5-81ea-a5fff17150f3",
+						"exec": [
+							"pm.test(\"Product Deletion unsuccessful : Admin not found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"The user either does not exist in the database or is not an admin\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admdssf@shopo.com\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Deletion unsuccessful : Invalid Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "180b4038-6551-44d3-9f36-314e593f8206",
+						"exec": [
+							"pm.test(\"Product Deletion unsuccessful : Invalid Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"This is not a valid email address. Please enter a valid email\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"adminshopo.com\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Password Updated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9fff0e4-8d56-442f-8c98-e1ddb490f164",
+						"exec": [
+							"pm.test(\"User Password Updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"User Password Updated\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\": \"sandeep@shopo.com\",\r\n    \"password\": \"admin\",\r\n    \"NewPassword\": \"NewAdmin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/Changepassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"Changepassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Incorrect Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47451c71-bfbe-46e5-a098-547c69d36684",
+						"exec": [
+							"pm.test(\"Password updation failed : Incorrect Password\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Incorrect Password\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\": \"sandeep@shopo.com\",\r\n    \"password\": \"admin\",\r\n    \"NewPassword\": \"NewAdmin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/Changepassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"Changepassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Password Not updated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9bc24d42-0b03-4e1f-837f-0aac740657f8",
+						"exec": [
+							"pm.test(\"User Password Not updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Not Updated\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\": \"sandeep@shopo.com\",\r\n    \"password\": \"admin\",\r\n    \"NewPassword\": \"NewAdmin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/Changepassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"Changepassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User not found to update password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "49e87721-fa97-4ddc-9c06-e26913942dc5",
+						"exec": [
+							"pm.test(\"User not found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"User not found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\": \"priyankaadode@shopo.com\",\r\n    \"password\": \"admin\",\r\n    \"NewPassword\": \"NewAdmin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/Changepassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"Changepassword"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
