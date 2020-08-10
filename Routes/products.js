@@ -89,7 +89,7 @@ router.post('/',upload.single('Picture'), async (req,res, next)=>{
              try{
              const newProduct= await product.save();
              if (newProduct != null) {
-                 res.json({message: "Product Added Successfully",newProduct});
+                 res.json({message: "Product Added Successfully"});
              }
              else{
                  res.json({message: "Some issue with the connection i guess"});
