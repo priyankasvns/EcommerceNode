@@ -125,9 +125,11 @@ router.delete('/:productId', async (req, res, next) => {
         if (checkUser != null) {           
         if (checkUser.validPassword(req.body.password) && checkUser.Role === "Admin") { 
         const id = req.params.productId;
-        const tobeDeletedProduct = await Product.findOne({Product_Id: id});
-        let splitString = tobeDeletedProduct.Picture.split("\\");        
+        const tobeDeletedProduct = await Product.findOne({Product_Id: id}); 
+        if (tobeDeletedProduct != null) {
+                      
         const deletedProduct =  await Product.deleteOne({Product_Id: id});
+        let splitString = tobeDeletedProduct.Picture.split("\\");
         if (deletedProduct != null) {
             const path = 'uploads/'+ splitString[1];
             fs.unlink(path, function(err){
@@ -142,9 +144,13 @@ router.delete('/:productId', async (req, res, next) => {
         } else {
             res.status(404).json({message: "Product not found",deletedProduct});
         }
+    }
+    else{
+        res.status(404).json({message: "Product not found"});
+    }
     } 
     else{
-        res.json({message:"Either the password is incorrect or the user is not an admin to add a new Product"});
+        res.json({message:"Either the password is incorrect or the user is not an admin to delete a new Product"});
     }
 }
     else {
