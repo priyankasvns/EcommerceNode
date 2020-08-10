@@ -8,6 +8,18 @@ const Order = require('../Models/Order');
 const Mongoose = require('mongoose');
 const { json } = require('body-parser');
 
+//Fetch all orders of a user
+router.get('/:userId', async (req,res,next)=>{
+    const allOrders = await Order.find({User_Id: req.params.userId}).exec();
+    if (allOrders[0] != null) {
+        res.status(200).json({message: "Orders fetched successfully",allOrders});
+    } else {
+        res.status(404).json({message: "No orders found for this user"});
+    }
+});
+
+
+
 //create an order
 router.post('/:userId', async (req,res, next)=>{
     

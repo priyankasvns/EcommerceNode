@@ -14,9 +14,9 @@ router.get('/:userId', async (req,res, next)=>{
     
     try{
         allProductsInCart = await Cart.find({User_Id: req.params.userId}).exec();
-        if (allProductsInCart != null) 
+        if (allProductsInCart[0] != null) 
         {
-            res.status(200).json({message: "Products list in your Cart are fetched",allProductsInCart});
+            res.status(200).json({message: "Products in your Cart are fetched",allProductsInCart});
         } 
         else 
         {
@@ -119,7 +119,7 @@ router.post('/:userId', async (req,res, next)=>{
                  res.json({message: "Product Added to Cart Successfully",newItem});
             }
             else{
-                 res.json({message: "Some issue with the connection i guess"});
+                 res.json({message: "Some issue. Product not added to the cart."});
             }
          
          }
@@ -136,7 +136,7 @@ router.post('/:userId', async (req,res, next)=>{
             const myQuery = {Product_Id: req.body.Product_Id, User_Id: req.params.userId};
             const newValue = {$set:{Quantity: newQuantity}};
             const updatedPost = await Cart.findOneAndUpdate(myQuery, newValue);
-            res.json(updatedPost);
+            res.json({message: "Product already exists in cart, Quantity updated!",updatedPost});
         }
         catch(err){
             res.json({message: err});
@@ -163,7 +163,7 @@ router.delete('/:usrId', async (req, res, next) => {
                         const myQuery = {Product_Id: req.body.Product_Id, User_Id: uId};
                         const newValue = {$set:{Quantity: newQuantity}};
                         const updatedPost = await Cart.findOneAndUpdate(myQuery, newValue);
-                        res.json(updatedPost);
+                        res.json({message: "Product already exists, updating the quantity to be removed in cart successfully",updatedPost});
                     }
                     catch(err){
                         res.json({message: err});
@@ -176,7 +176,7 @@ router.delete('/:usrId', async (req, res, next) => {
                     if (deletedProduct != null) {
                         res.status(200).json({message: "Product deleted from cart successfully",deletedProduct});
                     } else {
-                        res.status(404).json({message: "Product not found in the cart",deletedProduct});
+                        res.status(404).json({message: "Product could not be deleted from the cart",deletedProduct});
                     }            
                 }
                 else
